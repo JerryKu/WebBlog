@@ -12,6 +12,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
+
 //Restful Routes
 var blogSchema = new mongoose.Schema({
     title: String,
@@ -20,26 +21,9 @@ var blogSchema = new mongoose.Schema({
     created: {type:Date, default: Date.now}
 });
 
-
+//Blog mongoose model
 var Blog = mongoose.model("Blog", blogSchema);
 
-//title
-//image
-//body
-//created
-
-// Blog.create({
-//     title: "My First Blog",
-//     image: "http://photosforclass.com/download/7626464792",
-//     body: "This is my first time here"
-// }, function(err, blog){
-//     if(err){
-//         console.log(err);
-//     }else{
-//         console.log("New Blog Created:");
-//         console.log(blog);
-//     }
-// })
 //INDEX
 app.get("/blogs", function(req, res){
     Blog.find({}, function(err, blogs){
